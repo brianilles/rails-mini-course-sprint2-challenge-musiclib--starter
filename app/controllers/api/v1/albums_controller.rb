@@ -3,9 +3,10 @@ module Api
     class AlbumsController < ApplicationController
       def index
         if params[:artist_id].present?
-          @albums = Artist.find(params[:artist_id]).albums.where(available: true).order(:name)
+
+          @albums = Artist.find(params[:artist_id]).albums.available
         else
-          @albums = Album.where(available: true).order(:name).all
+          @albums = Album.available.all
         end
 
         render json: @albums.map { |album| format_album_json(album) }
