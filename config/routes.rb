@@ -8,7 +8,14 @@ Rails.application.routes.draw do
         resources :albums, only: [:index]
       end
       resources :songs, only: [:index, :show]
-      resources :users, only: [:index, :show, :create]
+      resources :users, only: [:index, :show, :create] do 
+        # index and create only work under user
+        resources :playlists, only: [:index, :create]
+      end
+      # show works without nesting
+      resources :playlists, only: [:show] do
+        resources :songs, only: [:index, :create]
+      end
     end
   end
 end

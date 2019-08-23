@@ -10,14 +10,8 @@ module Api
           @songs = Song.all
         end
 
-        # TODO: Sorting code should be extracted
-        if params[:sort] == "random"
-          @sorted_songs = @songs.to_a.shuffle
-        elsif params[:sort] == "reverse"
-          @sorted_songs = @songs.to_a.reverse
-        else
-          @sorted_songs = @songs
-        end
+        # instantiates a new song sorter and calls sort on it
+        @sorted_songs = SongSorter.new(@songs, params[:sort]).sort
 
         render json: @sorted_songs
       end
