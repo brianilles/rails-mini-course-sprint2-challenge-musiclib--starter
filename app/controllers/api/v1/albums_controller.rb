@@ -4,7 +4,7 @@ module Api
       def index
         if params[:artist_id].present?
 
-          @albums = Artist.find(params[:artist_id]).albums.available
+          @albums = Artist.find(params[:artist_id]).albums.inlcudes(:songs).available
         else
           @albums = Album.available.all
         end

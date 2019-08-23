@@ -46,6 +46,13 @@ RSpec.describe Album, type: :model do
       it "returns a list of available albums sorted by name" do
         # set up a some available albums and unavailable albums and make expecations that the
         # available albums scope only returns available albums sorted by name
+        Album.create([
+         {name: "Cool Album", available: false},
+         {name: "Cool Album2", available: false}, 
+         {name: "Cool Album3", available: true}, 
+         {name: "Cool Album4", available: true}])
+
+        expect(Album.available.count) to eq 2
       end
     end
   end
@@ -53,6 +60,13 @@ RSpec.describe Album, type: :model do
   describe "#length_seconds" do
     it "calculates the total length in seconds of an album" do
       # setup a valid album and songs and make expecations about the return value of length seconds
+      album = Album.new(name: "A really short album")
+
+      result = album.length_seconds
+      errors = album.errors.full_messages
+
+      expect(result).to be 0
+      expect(errors).to be_empty
     end
   end
 end

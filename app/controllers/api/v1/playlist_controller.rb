@@ -5,7 +5,7 @@ module Api
 
             # should only work if nested under user
             def index
-                @playlists = Playlist.find(user_id: params[:user_id])
+                @playlists = Playlist.all
 
                 render json: @playlists
             end
@@ -24,6 +24,14 @@ module Api
 
                 render json: @playlist
             end
+            
+            private
+            
+                # limit params
+                def playlist_params
+                    params.require(:playlist).permit(:name, :user_id)
+                end
+
         end
     end
 end
