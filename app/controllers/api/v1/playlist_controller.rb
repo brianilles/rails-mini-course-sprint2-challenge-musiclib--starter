@@ -10,7 +10,7 @@ module Api
                 render json: @playlists
             end
 
-            # should only work withour nesting
+            # should only work without nesting
             def show
                 @playlist = Playlist.find(params[:id])
 
