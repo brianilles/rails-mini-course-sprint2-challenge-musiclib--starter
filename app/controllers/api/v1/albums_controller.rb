@@ -23,7 +23,7 @@ module Api
         {
           id: album.id,
           name: album.name,
-          length_seconds: album.songs.reduce(0) { |length, song| length + song.length_seconds },
+          length_seconds: album.length_seconds,
           song_count: album.songs.count,
           created_at: album.created_at,
           updated_at: album.updated_at,
